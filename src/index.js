@@ -1,1 +1,4 @@
-console.log('hello')
+import App from "./App";
+
+const postman = new App('#root');
+postman.render()
