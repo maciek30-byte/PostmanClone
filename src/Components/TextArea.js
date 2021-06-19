@@ -21,16 +21,20 @@ class TextArea {
     try {
       textArea.value = JSON.stringify(JSON.parse(this.value), null, 4);
     } catch (e) {
-      textArea.value =this.value
+      textArea.value = this.value;
       this.state = this.stateEnum.hasError;
       const message = document.createElement("p");
       message.innerText = e.message;
       container.appendChild(message);
     }
-
     if (this.isEditable) textArea.setAttribute("readonly", this.isEditable);
     textArea.addEventListener("input", (e) => this.onChange(e.target.value));
+    setTimeout(() => {
+      if (this.isEditable) return;
+      textArea.focus();
+    }, 0);
     container.appendChild(textArea);
+
     return container;
   }
 }
