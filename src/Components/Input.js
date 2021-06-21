@@ -14,9 +14,9 @@ class Input {
 
     input.addEventListener("input", (e)=>this.onInput(e.target.value));
 
-    setTimeout(
-      ()=> input.focus(),0
-    )
+    // setTimeout(
+    //   ()=> input.focus(),0
+    // )
     return input;
   }
 }

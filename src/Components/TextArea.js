@@ -15,9 +15,11 @@ class TextArea {
     const textArea = document.createElement("textarea");
     textArea.placeholder = this.placeHolder;
     textArea.value = this.value;
+
     // hot style add//
     textArea.style.width = "100%";
     textArea.style.minHeight = "200px";
+
     try {
       textArea.value = JSON.stringify(JSON.parse(this.value), null, 4);
     } catch (e) {
@@ -27,10 +29,11 @@ class TextArea {
       message.innerText = e.message;
       container.appendChild(message);
     }
-    if (this.isEditable) textArea.setAttribute("readonly", this.isEditable);
+    if (!this.isEditable) textArea.setAttribute("readonly", this.isEditable);
     textArea.addEventListener("input", (e) => this.onChange(e.target.value));
+
     setTimeout(() => {
-      if (this.isEditable) return;
+      if (!this.isEditable) return;
       textArea.focus();
     }, 0);
     container.appendChild(textArea);
