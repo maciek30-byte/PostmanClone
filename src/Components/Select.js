@@ -14,6 +14,8 @@ class Select {
       select.appendChild(option);
     });
     select.value = this.value;
+    // hot styles//
+    select.style.width = '100%'
 
     select.addEventListener('input', (e)=>this.onChange(e.target.value))
     return select;
