@@ -3,13 +3,13 @@ class TextArea {
     default: "Default",
     hasError: "Error",
   };
-  constructor(value, onChange, isEditable, isFocused) {
+  constructor(value, onChange, isEditable, caretPosition) {
     this.placeHolder = "type your text";
     this.value = value;
     this.onChange = onChange;
     this.isEditable = isEditable;
     this.state = this.stateEnum.default;
-    this.isFocused = isFocused;
+    this.caretPosition = caretPosition
   }
   render() {
     const container = document.createElement("div");
@@ -33,11 +33,13 @@ class TextArea {
 
     if (!this.isEditable) textArea.setAttribute("readonly", this.isEditable);
 
-    textArea.addEventListener("input", (e) => this.onChange(e.target.value));
+    textArea.addEventListener("input", (e) => this.onChange(e.target.value,e.target.selectionStart));
 
-    if (this.isEditable && this.isFocused) {
+    if (this.isEditable && this.caretPosition!== null) {
       setTimeout(() => {
         textArea.focus();
+        textArea.selectionStart = this.caretPosition;
+        textArea.selectionEnd = this.caretPosition
       });
     }
 

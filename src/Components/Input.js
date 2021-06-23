@@ -1,8 +1,8 @@
 class Input {
-  constructor(value, onInput, isFocused) {
+  constructor(value, onInput, caretPosition) {
     this.value = value;
     this.onInput = onInput;
-    this.isFocused = isFocused;
+    this.caretPosition = caretPosition;
   }
 
   render() {
@@ -13,10 +13,17 @@ class Input {
     input.style.background = "yellow";
     input.style.color = "black";
 
-    input.addEventListener("input", (e) => this.onInput(e.target.value));
+    input.addEventListener("input", (e) =>
+      this.onInput(e.target.value, input.selectionStart)
+    );
 
-    if (this.isFocused) {
-      setTimeout(() => input.focus(), 0);
+    if (this.caretPosition !== null) {
+      setTimeout(() =>{
+        input.focus()
+        input.selectionStart = this.caretPosition;
+        input.selectionEnd = this.caretPosition
+      },0 )
+
     }
 
     return input;
